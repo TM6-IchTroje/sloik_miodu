@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1031745272558",
+    "project_id": "sloik-miodu-000",
+    "storage_bucket": "sloik-miodu-000.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031745272558:android:cf6ece0dfee2d195be91ff",
+        "android_client_info": {
+          "package_name": "com.example.sloik_miodu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031745272558-a0nj6lp77tdtsqbau2epl5g8ciges85u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDXagBLUSzbz8a0WxttAh2KGXjdw32lKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031745272558-a0nj6lp77tdtsqbau2epl5g8ciges85u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
