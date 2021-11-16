@@ -2,7 +2,6 @@
     package="com.example.sloik_miodu">
    <application
         android:label="sloik_miodu"
-        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
