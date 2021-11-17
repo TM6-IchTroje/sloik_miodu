@@ -1,7 +1,9 @@
 import 'package:firebase_shop_app/core/providers/orders_provider.dart';
 import 'package:firebase_shop_app/core/providers/product_model_provider.dart';
+import 'package:firebase_shop_app/signup.dart';
 import 'package:firebase_shop_app/utils/view/theme_manager.dart';
 import 'package:firebase_shop_app/view/screens/logInScreen.dart';
+import 'package:firebase_shop_app/view/screens/signUp_screen.dart';
 import 'package:firebase_shop_app/view/widgets/bottom_app_bar.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/logIn': (ctx) => logInScreen(),
+          '/signUp': (ctx) => signUp(),
         },
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Router.generateRoute,

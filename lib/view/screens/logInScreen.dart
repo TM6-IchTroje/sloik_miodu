@@ -58,15 +58,18 @@ class logInScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>signup()));
+
+                      TextButton(
+
+                        child: Text('Zarejestruj się'),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signUp');
                         },
-                        child: Text("Zarejestruj się!", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),),
-                      )
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                        ),
+                      ),
+
 
                     ],
                   )

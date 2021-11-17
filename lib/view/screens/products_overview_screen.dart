@@ -27,16 +27,19 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         title: Image.network('https://firebasestorage.googleapis.com/v0/b/sloik-miodu-000.appspot.com/o/Screenshot%202021-11-16%20at%2022.08.56.png?alt=media&token=b3d516af-5ffe-4a86-84b3-f2c012f15b14'),
         actions: [
          TextButton(
+
+
               child: Text('Zaloguj się'),
 
-
               onPressed: () {
-                BlankScreen();
                 Navigator.pushNamed(context, '/logIn');
               },
            style: TextButton.styleFrom(
              primary: Colors.white,
            ),
+
+
+
 
             ),
 
