@@ -1,0 +1,13 @@
+Target dependency graph (5 targets)
+Flutter in Pods, no dependencies
+Reachability in Pods, no dependencies
+connectivity in Pods, depends on:
+Flutter in Pods (explicit)
+Reachability in Pods (explicit)
+shared_preferences in Pods, depends on:
+Flutter in Pods (explicit)
+Pods-Runner in Pods, depends on:
+Flutter in Pods (explicit)
+Reachability in Pods (explicit)
+connectivity in Pods (explicit)
+shared_preferences in Pods (explicit)

@@ -1,4 +1,7 @@
 PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
   - Firebase/CoreOnly (6.33.0):
     - FirebaseCore (= 6.10.3)
   - Firebase/Database (6.33.0):
@@ -38,11 +41,16 @@ PODS:
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.12)
+  - Reachability (3.2)
+  - shared_preferences (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Flutter`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
   trunk:
@@ -55,16 +63,22 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - Reachability
 
 EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_database:
     :path: ".symlinks/plugins/firebase_database/ios"
   Flutter:
     :path: Flutter
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
+  connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
   firebase_core: 5d6a02f3d85acd5f8321c2d6d62877626a670659
   firebase_database: a3737781469b5275f899e04fcb0aa556f37e400a
@@ -77,7 +91,9 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  shared_preferences: 5033afbb22d372e15aff8ff766df9021b845f273
 
-PODFILE CHECKSUM: eb77cd5a845e928c3a70e9656aa1e50b7131e89b
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.11.2
