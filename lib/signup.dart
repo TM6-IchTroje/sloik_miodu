@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sloik_miodu/logInScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class signup extends StatelessWidget {
-  const signup({Key? key}) : super(key: key);
+  signup({Key? key}) : super(key: key);
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController pass1Controller = TextEditingController();
+  TextEditingController pass2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +30,14 @@ class signup extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                   ),
                   TextFormField(
+                    controller: emailController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Email",
                         hintStyle: TextStyle(color: Colors.white)),
                   ),
                   TextFormField(
+                    controller: pass1Controller,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "Hasło:",
@@ -43,6 +50,7 @@ class signup extends StatelessWidget {
                     ),
                   ),
                   TextFormField(
+                    controller: pass2Controller,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "Potwierdź hasło:",
@@ -60,7 +68,18 @@ class signup extends StatelessWidget {
                     child: RaisedButton(
                         child: Text("Zarejestruj się"),
                         color: Colors.white,
-                        onPressed: (){}),
+                        onPressed: (){
+                          if (pass1Controller.text == pass2Controller.text) {
+                            CollectionReference users = FirebaseFirestore
+                                .instance.collection('users');
+
+                            print(users);
+                            users.add({
+                              'email': emailController.text,
+                              'password': pass1Controller.text
+                            });
+                          }
+                        }),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
