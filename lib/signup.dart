@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sloik_miodu/logInScreen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class signup extends StatelessWidget {
   signup({Key? key}) : super(key: key);
@@ -70,12 +70,10 @@ class signup extends StatelessWidget {
                         color: Colors.white,
                         onPressed: (){
                           if (pass1Controller.text == pass2Controller.text) {
-                            CollectionReference users = FirebaseFirestore.instance.collection('users');
-                            print(users);
-                            users.add({
-                              'email': emailController.text,
-                              'password': pass1Controller.text
-                            });
+                            FirebaseAuth.instance.createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: pass1Controller.text
+                            );
                           }
                         }),
                   ),
