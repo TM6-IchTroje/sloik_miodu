@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1031745272558",
+    "firebase_url": "https://sloik-miodu-000-default-rtdb.firebaseio.com",
     "project_id": "sloik-miodu-000",
     "storage_bucket": "sloik-miodu-000.appspot.com"
   },
@@ -29,6 +30,13 @@
             {
               "client_id": "1031745272558-a0nj6lp77tdtsqbau2epl5g8ciges85u.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1031745272558-tvl47ui95askjdr3rk9vieffcu1pnbha.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sloikMiodu"
+              }
             }
           ]
         }

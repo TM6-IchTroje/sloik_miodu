@@ -70,9 +70,7 @@ class signup extends StatelessWidget {
                         color: Colors.white,
                         onPressed: (){
                           if (pass1Controller.text == pass2Controller.text) {
-                            CollectionReference users = FirebaseFirestore
-                                .instance.collection('users');
-
+                            CollectionReference users = FirebaseFirestore.instance.collection('users');
                             print(users);
                             users.add({
                               'email': emailController.text,
