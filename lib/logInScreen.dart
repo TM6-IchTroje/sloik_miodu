@@ -11,6 +11,10 @@ class logInScreen extends StatefulWidget {
   @override
   State<logInScreen> createState() => _logInScreenState();
 }
+FirebaseAuth auth = FirebaseAuth.instance;
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
+bool _validate = false;
 
 final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,14 +22,22 @@ String p=
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 RegExp regExp = new RegExp(p);
 
-void validation() async{
-    final FormState? _form = _formKey.currentState;
-    if(_form!.validate()){
-  print("Yes");
+Future<bool> validation(TextEditingController emailController, TextEditingController passwordController) async{
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: _passwordController.text
+    );
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+      return false;
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+      return false;
     }
-    else  {
-      print("No");
-    }
+  }
+  return true;
 }
 
 bool obserText=true;
@@ -54,6 +66,7 @@ class _logInScreenState extends State<logInScreen> {
                       fontWeight: FontWeight.bold),
                     ),
                     TextFormField(
+                      controller: _emailController,
                       validator: (value){
                       if(value==""){
                         return "Podaj email";
@@ -65,9 +78,11 @@ class _logInScreenState extends State<logInScreen> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.white)),
+                        hintStyle: TextStyle(color: Colors.white),
+                        errorText: _validate ? 'Your message' : null,),
                     ),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: obserText,
                       validator: (value){
                         if(value==""){
@@ -94,6 +109,7 @@ class _logInScreenState extends State<logInScreen> {
                             ),
                           ),
                           hintStyle: TextStyle(color: Colors.white),
+                        errorText: _validate ? 'Your message' : null,
                       ),
                     ),
                     Container(
@@ -103,7 +119,9 @@ class _logInScreenState extends State<logInScreen> {
                           child: Text("Zaloguj się"),
                           color: Colors.white,
                           onPressed: (){
-                            validation();
+                            validation(_emailController,_passwordController).then((value) => changeToMain(value), );
+
+
                           }),
                     ),
                     Row(
@@ -133,5 +151,16 @@ class _logInScreenState extends State<logInScreen> {
         ),
       ),
     );
+  }
+
+ void changeToMain(bool answer) {
+    if(answer==true){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (ctx)=>mainScreen(),
+        ),
+      );
+    }
+
   }
 }

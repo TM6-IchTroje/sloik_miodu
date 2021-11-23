@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
-
 import 'logInScreen.dart';
+import 'login.dart';
+
 
 class mainScreen extends StatelessWidget {
   const mainScreen({Key? key}) : super(key: key);
@@ -28,4 +28,5 @@ class mainScreen extends StatelessWidget {
       ),
     );
   }
+
 }
