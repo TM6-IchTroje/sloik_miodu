@@ -44,6 +44,9 @@ Future<bool> checkLogin(TextEditingController emailController, TextEditingContro
       print('Wrong password provided for that user.');
       return false;
     }
+    else {
+      return false;
+    }
   }
   return true;
 }
