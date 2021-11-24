@@ -101,6 +101,8 @@ class signup extends StatelessWidget {
                                   email: emailController.text,
                                   password: pass1Controller.text
                               );
+
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>logInScreen()));
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'weak-password') {
                                 passErr = 'The password provided is too weak.';
@@ -109,8 +111,6 @@ class signup extends StatelessWidget {
                               }
                             }
                           }
-
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>logInScreen()));
                           }),
                     ),
                     Row(
