@@ -14,19 +14,27 @@ class logInScreen extends StatefulWidget {
 FirebaseAuth auth = FirebaseAuth.instance;
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
-bool _validate = false;
 
 final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 String p=
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 RegExp regExp = new RegExp(p);
+void validation() async{
+  final FormState?   _form = _formKey.currentState;
+  if(_formKey.currentState!.validate()){
+    print("yes");
+  }
+  else  {
+    print("no");
+  }
+}
+Future<bool> checkLogin(TextEditingController emailController, TextEditingController passwordController) async{
 
-Future<bool> validation(TextEditingController emailController, TextEditingController passwordController) async{
   try {
     UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
-        password: _passwordController.text
+        password: passwordController.text
     );
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
@@ -78,8 +86,7 @@ class _logInScreenState extends State<logInScreen> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.white),
-                        errorText: _validate ? 'Your message' : null,),
+                        hintStyle: TextStyle(color: Colors.white),),
                     ),
                     TextFormField(
                       controller: _passwordController,
@@ -109,7 +116,6 @@ class _logInScreenState extends State<logInScreen> {
                             ),
                           ),
                           hintStyle: TextStyle(color: Colors.white),
-                        errorText: _validate ? 'Your message' : null,
                       ),
                     ),
                     Container(
@@ -119,7 +125,9 @@ class _logInScreenState extends State<logInScreen> {
                           child: Text("Zaloguj się"),
                           color: Colors.white,
                           onPressed: (){
-                            validation(_emailController,_passwordController).then((value) => changeToMain(value), );
+                            validation();
+                             checkLogin(_emailController,_passwordController).then((value) => changeToMain(value), );
+
 
 
                           }),
