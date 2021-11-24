@@ -93,10 +93,10 @@ class signup extends StatelessWidget {
                       child: RaisedButton(
                           child: Text("Zarejestruj się"),
                           color: Colors.white,
-                          onPressed: (){
+                          onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             try {
-                              FirebaseAuth.instance
+                              await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                   email: emailController.text,
                                   password: pass1Controller.text
@@ -104,14 +104,15 @@ class signup extends StatelessWidget {
 
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>logInScreen()));
                             } on FirebaseAuthException catch (e) {
+                              print(e);
                               if (e.code == 'weak-password') {
-                                passErr = 'The password provided is too weak.';
+                                passErr = e.message!;
                               } else {
-                                emailErr = 'The account already exists for that email.';
+                                emailErr = e.message!;
                               }
-                            } catch (e) {
-                              emailErr = e.toString();
                             }
+                            _formKey.currentState!.validate();
+                            passErr = emailErr = "";
                           }
                           }),
                     ),
