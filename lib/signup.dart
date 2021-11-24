@@ -106,9 +106,11 @@ class signup extends StatelessWidget {
                             } on FirebaseAuthException catch (e) {
                               if (e.code == 'weak-password') {
                                 passErr = 'The password provided is too weak.';
-                              } else if (e.code == 'email-already-in-use') {
+                              } else {
                                 emailErr = 'The account already exists for that email.';
                               }
+                            } catch (e) {
+                              emailErr = e.toString();
                             }
                           }
                           }),
