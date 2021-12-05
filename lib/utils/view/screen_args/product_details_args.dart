@@ -1,9 +1,7 @@
 class ProductDetailsArgs {
-  String id;
-  int index;
+  String name;
+  String description;
+  String link;
 
-  ProductDetailsArgs({
-    this.id,
-    this.index,
-  });
+  ProductDetailsArgs({this.name, this.description, this.link});
 }

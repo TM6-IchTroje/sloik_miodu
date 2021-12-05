@@ -1,13 +1,11 @@
-import 'package:firebase_shop_app/core/providers/cart_provider.dart';
-import 'package:firebase_shop_app/core/providers/product_model_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
-  final ProductModelProvider product;
-  final int index;
+  final String name;
+  final String description;
+  final String link;
 
-  ProductDetailsWidget({this.product, this.index});
+  ProductDetailsWidget({this.name, this.description, this.link});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class ProductDetailsWidget extends StatelessWidget {
       SizedBox(height: 15.0),
       Padding(
         padding: EdgeInsets.only(left: 20.0),
-        child: Text(product.title,
+        child: Text(this.name,
             style: TextStyle(
                 fontFamily: 'Varela',
                 fontSize: 42.0,
@@ -25,13 +23,13 @@ class ProductDetailsWidget extends StatelessWidget {
       SizedBox(height: 15.0),
       // -------------------------------- Product Image------------------------------- //
       Hero(
-          tag: 'tage$index',
-          child: Image.network(product.imageUrl,
+          tag: 12,
+          child: Image.network(this.link,
               height: 150.0, width: 100.0, fit: BoxFit.contain)),
       SizedBox(height: 20.0),
       // -------------------------------- Product Price------------------------------- //
       Center(
-        child: Text(product.price.toString(),
+        child: Text("15.99",
             style: TextStyle(
                 fontFamily: 'Varela',
                 fontSize: 22.0,
@@ -41,7 +39,7 @@ class ProductDetailsWidget extends StatelessWidget {
       SizedBox(height: 10.0),
       // -------------------------------- Product Name ------------------------------- //
       Center(
-        child: Text(product.title,
+        child: Text(this.name,
             style: TextStyle(
                 color: Color(0xFF575E67),
                 fontFamily: 'Varela',
@@ -52,7 +50,7 @@ class ProductDetailsWidget extends StatelessWidget {
       Center(
         child: Container(
           width: MediaQuery.of(context).size.width - 50.0,
-          child: Text(product.description,
+          child: Text(this.description,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Varela',
@@ -62,17 +60,7 @@ class ProductDetailsWidget extends StatelessWidget {
       ),
       SizedBox(height: 20.0),
       // -------------------------------- Btn Add To Cart------------------------------- //
-      Consumer<CartProvider>(
-        builder: (BuildContext context, CartProvider cart, Widget ch) {
-          return Center(
-              child: InkWell(
-            child: ch,
-            onTap: () {
-              cart.addItemToCart(
-                  product.id, product.title, product.price, product.imageUrl);
-            },
-          ));
-        },
+      Center(
         child: Container(
             width: MediaQuery.of(context).size.width - 50.0,
             height: 50.0,

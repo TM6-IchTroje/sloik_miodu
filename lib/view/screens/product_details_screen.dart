@@ -1,25 +1,18 @@
-import 'package:firebase_shop_app/core/providers/cart_provider.dart';
-import 'package:firebase_shop_app/core/providers/product_model_provider.dart';
-import 'package:firebase_shop_app/core/providers/products_provider.dart';
-import 'package:firebase_shop_app/utils/view/constant_routs.dart';
-import 'package:firebase_shop_app/view/shared/badge.dart';
 import 'package:firebase_shop_app/view/widgets/product_details_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  final String productId;
-  final int index;
+  final String name;
+  final String description;
+  final String link;
 
-  ProductDetailsScreen({this.productId, this.index});
+  ProductDetailsScreen({this.name, this.description, this.link});
+
   @override
   Widget build(BuildContext context) {
-    final loadedProduct = Provider.of<ProductsProvider>(context, listen: false)
-        .findProductById(productId);
-
     // Listen to specific object
-    return ChangeNotifierProvider.value(
-      value: loadedProduct,
+    return Padding(
+      padding: EdgeInsets.only(left: 0.0),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -31,10 +24,10 @@ class ProductDetailsScreen extends StatelessWidget {
               Navigator.of(context).pop();
             },
           ),
-          actions: [
-          ],
+          actions: [],
         ),
-        body: ProductDetailsWidget(product: loadedProduct, index: index),
+        body: ProductDetailsWidget(
+            name: this.name, description: this.description, link: this.link),
       ),
     );
   }
