@@ -14,14 +14,6 @@ class logInScreen extends StatelessWidget {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = new RegExp(p);
 
-  void validation() async {
-    final FormState _form = _formKey.currentState;
-    if (_formKey.currentState.validate()) {
-      print("yes");
-    } else {
-      print("no");
-    }
-  }
 
   Future<bool> checkLogin(TextEditingController emailController,
       TextEditingController passwordController) async {
@@ -29,6 +21,7 @@ class logInScreen extends StatelessWidget {
       AuthResult userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+      print(emailController.text);
     } catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -50,7 +43,7 @@ class logInScreen extends StatelessWidget {
 
     void changeToMain(bool answer) {
       if (answer == true) {
-        Navigator.pushNamed(context, '/allProductsScreen');
+        Navigator.pushNamed(context, '/MyApp');
       }
     }
 
@@ -135,7 +128,6 @@ class logInScreen extends StatelessWidget {
                           child: Text("Zaloguj się"),
                           color: Colors.white,
                           onPressed: () {
-                            validation();
                             checkLogin(_emailController, _passwordController)
                                 .then(
                                   (value) => changeToMain(value),

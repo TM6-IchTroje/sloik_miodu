@@ -1,3 +1,4 @@
+import 'package:firebase_shop_app/main.dart';
 import 'package:firebase_shop_app/utils/view/screen_args/product_details_args.dart';
 import 'package:firebase_shop_app/view/screens/all_products_screen.dart';
 import 'package:firebase_shop_app/view/screens/blank_screen.dart';
@@ -21,6 +22,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => MyProductsScreen());
       case allProductsScreenRoute:
         return MaterialPageRoute(builder: (_) => AllProductsScreen());
+      case mainRoute:
+        return MaterialPageRoute(builder: (_) => MyApp());
       default:
         return MaterialPageRoute(
           builder: (context) => BlankScreen(),
