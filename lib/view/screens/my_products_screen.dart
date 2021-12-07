@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_shop_app/view/screens/log_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyProductsScreen extends StatelessWidget {
@@ -9,113 +10,145 @@ class MyProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    if (!staticLogInState.isLoggedIn) {
+      return NoLogin();
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Moje ogłoszenia"),
+        ),
+        body: BookList(),
+        // ADD (Create)
 
-      appBar: AppBar(
-        title: Text("Moje ogłoszenia"),
-      ),
-      body: BookList(),
-      // ADD (Create)
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Dodaj ogłoszenie"),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text("Dodaj ogłoszenie"),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Nazwa: ",
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        TextField(
+                          controller: nameController,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text("Cena: "),
+                        ),
+                        TextField(
+                          controller: priceController,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Opis: ",
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        TextField(
+                          controller: descriptionController,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text("Link: "),
+                        ),
+                        TextField(
+                          controller: linkController,
+                        ),
+                      ],
+                    ),
+                    actions: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          "Nazwa: ",
-                          textAlign: TextAlign.start,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: RaisedButton(
+                          color: Colors.red,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "Cofnij",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
-                      TextField(
-                        controller: nameController,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text("Cena: "),
-                      ),
-                      TextField(
-                        controller: priceController,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          "Opis: ",
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      TextField(
-                        controller: descriptionController,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text("Link: "),
-                      ),
-                      TextField(
-                        controller: linkController,
-                      ),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: RaisedButton(
-                        color: Colors.red,
+
+                      //Add Button
+
+                      RaisedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
+//TODO: Firestore create a new record code
+
+                          Map<String, dynamic> newBook =
+                              new Map<String, dynamic>();
+                          newBook["name"] = nameController.text;
+                          newBook["price"] = priceController.text;
+                          newBook["description"] = descriptionController.text;
+                          newBook["link"] = linkController.text;
+
+                          Firestore.instance
+                              .collection("user_products")
+                              .add(newBook)
+                              .whenComplete(() {
+                            Navigator.of(context).pop();
+                          });
+
+                          Firestore.instance
+                              .collection("all_products")
+                              .add(newBook)
+                              .whenComplete(() {});
                         },
                         child: Text(
-                          "Cofnij",
+                          "Zapisz",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                    ),
+                    ],
+                  );
+                });
+          },
+          tooltip: 'Add Title',
+          child: Icon(Icons.add),
+        ),
+      );
+    }
+  }
+}
 
-                    //Add Button
-
-                    RaisedButton(
-                      onPressed: () {
-//TODO: Firestore create a new record code
-
-                        Map<String, dynamic> newBook =
-                            new Map<String, dynamic>();
-                        newBook["name"] = nameController.text;
-                        newBook["price"] = priceController.text;
-                        newBook["description"] = descriptionController.text;
-                        newBook["link"] = linkController.text;
-
-                        Firestore.instance
-                            .collection("user_products")
-                            .add(newBook)
-                            .whenComplete(() {
-                          Navigator.of(context).pop();
-                        });
-
-                        Firestore.instance
-                            .collection("all_products")
-                            .add(newBook)
-                            .whenComplete(() {
-                        });
-                      },
-                      child: Text(
-                        "Zapisz",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                );
-              });
-        },
-        tooltip: 'Add Title',
-        child: Icon(Icons.add),
+class NoLogin extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Moje ogłoszenia"),
       ),
+
+      body: Center(
+        child: TextButton(
+          child: Text(
+            "Zaloguj się, by przeglądać swoje produkty",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 20,
+                color: Color(0xFFFA6442),
+                fontWeight: FontWeight.normal),
+          ),
+          onPressed: () {
+            staticLogInState.isLoggedIn = false;
+            Navigator.pushNamed(context, '/logIn');
+          },
+        ),
+      ),
+
+      // ADD (Create)
     );
   }
 }
@@ -249,8 +282,7 @@ class BookList extends StatelessWidget {
                                           .collection("all_products")
                                           .document(document.documentID)
                                           .updateData(updateBook)
-                                          .whenComplete(() {
-                                      });
+                                          .whenComplete(() {});
                                     },
                                     child: Text(
                                       "Uaktualnij",

@@ -12,12 +12,6 @@ class AllProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (staticLogInState.isLoggedIn) {
-      print(staticLogInState.email + "zalogowany hehe");
-    } else {
-      print("zonk");
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Image.network(
@@ -37,7 +31,10 @@ class AllProductsScreen extends StatelessWidget {
                 showDialog(context: context, builder: (BuildContext context) {
                   return new AlertDialog(
                     content: TextButton(
-                      child: Text("Wyloguj się"),
+                      child: Text("Wyloguj się", style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xFFFA6442),
+                          fontWeight: FontWeight.normal)),
                       onPressed: (){
                         staticLogInState.isLoggedIn = false;
                         Navigator.pushNamed(context, '/MyApp');
