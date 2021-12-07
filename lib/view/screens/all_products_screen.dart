@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_shop_app/utils/view/constant_routs.dart';
 import 'package:firebase_shop_app/utils/view/screen_args/product_details_args.dart';
+import 'package:firebase_shop_app/view/screens/log_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class AllProductsScreen extends StatelessWidget {
@@ -11,15 +12,43 @@ class AllProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (staticLogInState.isLoggedIn) {
+      print(staticLogInState.email + "zalogowany hehe");
+    } else {
+      print("zonk");
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Image.network(
             'https://firebasestorage.googleapis.com/v0/b/sloik-miodu-000.appspot.com/o/Screenshot%202021-11-16%20at%2022.08.56.png?alt=media&token=b3d516af-5ffe-4a86-84b3-f2c012f15b14'),
         actions: [
           TextButton(
-            child: Text('Zaloguj się'),
+            child: Text((() {
+              if (staticLogInState.isLoggedIn) {
+                return staticLogInState.email;
+              }
+              return "Zaloguj się";
+            })()),
             onPressed: () {
-              Navigator.pushNamed(context, '/logIn');
+
+              if(staticLogInState.isLoggedIn)
+              {
+                showDialog(context: context, builder: (BuildContext context) {
+                  return new AlertDialog(
+                    content: TextButton(
+                      child: Text("Wyloguj się"),
+                      onPressed: (){
+                        staticLogInState.isLoggedIn = false;
+                        Navigator.pushNamed(context, '/MyApp');
+                      },
+                    ),
+                  );
+                });
+              }
+              else {
+                Navigator.pushNamed(context, '/logIn');
+              }
             },
             style: TextButton.styleFrom(
               primary: Colors.white,

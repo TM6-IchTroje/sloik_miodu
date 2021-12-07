@@ -2,6 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class staticLogInState {
+  static bool isLoggedIn = false;
+  static String email = "Zaloguj się";
+}
+
 class logInScreen extends StatelessWidget {
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -21,7 +26,7 @@ class logInScreen extends StatelessWidget {
       AuthResult userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      print(emailController.text);
+      staticLogInState.email = emailController.text;
     } catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -44,6 +49,7 @@ class logInScreen extends StatelessWidget {
     void changeToMain(bool answer) {
       if (answer == true) {
         Navigator.pushNamed(context, '/MyApp');
+        staticLogInState.isLoggedIn = true;
       }
     }
 
