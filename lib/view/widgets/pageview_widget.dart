@@ -8,16 +8,19 @@ class PageViewWidget extends StatelessWidget {
   final String description;
   final String link;
   final String ownerName;
+  final String aboutOwner;
+  final String photo;
 
-  PageViewWidget({this.number, this.name, this.description, this.link, this.ownerName});
+  PageViewWidget({this.number, this.name, this.description, this.link, this.ownerName, this.aboutOwner, this.photo});
 
   @override
   Widget build(BuildContext context) {
+
     if (number == AvailableNumber.First) {
     return ProductDetailsWidget(name: this.name, description: this.description, link: this.link);
     }
     else {
-      return AboutUserWidget(name: this.name, ownerName: this.ownerName);
+      return AboutUserWidget(name: this.name, ownerName: this.ownerName, aboutOwner: this.aboutOwner, photo: this.photo,);
     }
 
   }

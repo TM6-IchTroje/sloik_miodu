@@ -9,6 +9,7 @@ class AllProductsScreen extends StatelessWidget {
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController linkController = new TextEditingController();
   TextEditingController sellerController = new TextEditingController();
+  TextEditingController aboutOwnerController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class BookList extends StatelessWidget {
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController linkController = new TextEditingController();
   TextEditingController sellerController = new TextEditingController();
+  TextEditingController aboutOwnerController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,9 @@ class BookList extends StatelessWidget {
                                 name: document['name'],
                                 description: document['description'],
                                 link: document['link'],
-                                ownerName: document['seller']),
+                                ownerName: document['seller'],
+                                aboutOwner: document['aboutSeller'],
+                                photo: document['photoUser']),
                           );
                         },
                         child: Container(

@@ -7,12 +7,13 @@ class ProductDetailsScreen extends StatelessWidget {
   final String description;
   final String link;
   final String ownerName;
+  final String aboutOwner;
+  final String photo;
 
-  ProductDetailsScreen({this.name, this.description, this.link, this.ownerName});
+  ProductDetailsScreen({this.name, this.description, this.link, this.ownerName, this.aboutOwner, this.photo});
 
   @override
   Widget build(BuildContext context) {
-    //print(ownerName);
     // Listen to specific object
     return Padding(
       padding: EdgeInsets.only(left: 0.0),
@@ -31,8 +32,10 @@ class ProductDetailsScreen extends StatelessWidget {
         ),
         body: PageView(
         children: <Widget>[
-          PageViewWidget(number: AvailableNumber.First,name: this.name, description: this.description, link: this.link, ownerName: this.ownerName),
-          PageViewWidget(number: AvailableNumber.Second,name: this.name, description: this.description, link: this.link, ownerName: this.ownerName)
+          PageViewWidget(number: AvailableNumber.First,name: this.name, description: this.description,
+              link: this.link, ownerName: this.ownerName),
+          PageViewWidget(number: AvailableNumber.Second,name: this.name, description: this.description,
+              link: this.link, ownerName: this.ownerName, aboutOwner: this.aboutOwner, photo: this.photo)
         ]
       ),
     )
