@@ -1,3 +1,4 @@
+import 'package:firebase_shop_app/view/widgets/pageview_widget.dart';
 import 'package:firebase_shop_app/view/widgets/product_details_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -26,9 +27,13 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           actions: [],
         ),
-        body: ProductDetailsWidget(
-            name: this.name, description: this.description, link: this.link),
+        body: PageView(
+        children: <Widget>[
+          PageViewWidget(number: AvailableNumber.First,name: this.name, description: this.description, link: this.link),
+          PageViewWidget(number: AvailableNumber.Second,name: this.name, description: this.description, link: this.link)
+        ]
       ),
+    )
     );
   }
 }

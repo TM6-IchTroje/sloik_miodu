@@ -7,6 +7,7 @@ class ProductDetailsWidget extends StatelessWidget {
 
   ProductDetailsWidget({this.name, this.description, this.link});
 
+
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
@@ -69,14 +70,17 @@ class ProductDetailsWidget extends StatelessWidget {
                 color: Color(0xFFF17532)),
             child: Center(
                 child: Text(
-              'Napisz do sprzedawcy!',
-              style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ))),
+                  'Napisz do sprzedawcy!',
+                  style: TextStyle(
+                      fontFamily: 'Varela',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ))),
       ),
     ]);
   }
 }
+
+
+
