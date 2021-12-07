@@ -7,10 +7,9 @@ class PageViewWidget extends StatelessWidget {
   final String name;
   final String description;
   final String link;
-  final String nameOwner;
+  final String ownerName;
 
-  PageViewWidget(
-      {this.number, this.name, this.description, this.link, this.nameOwner});
+  PageViewWidget({this.number, this.name, this.description, this.link, this.ownerName});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class PageViewWidget extends StatelessWidget {
     return ProductDetailsWidget(name: this.name, description: this.description, link: this.link);
     }
     else {
-      return AboutUserWidget(name: this.name, description: this.description, link: this.link);
+      return AboutUserWidget(name: this.name, ownerName: this.ownerName);
     }
 
   }
