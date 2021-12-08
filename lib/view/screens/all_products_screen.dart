@@ -15,7 +15,7 @@ class AllProductsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.network(
-            'https://firebasestorage.googleapis.com/v0/b/sloik-miodu-000.appspot.com/o/Screenshot%202021-11-16%20at%2022.08.56.png?alt=media&token=b3d516af-5ffe-4a86-84b3-f2c012f15b14'),
+            'https://firebasestorage.googleapis.com/v0/b/sloik-miodu-000.appspot.com/o/Screenshot%202021-11-16%20at%2022.08.56.png?alt=media&token=613ad784-4e0d-4fa1-8131-869d7944292b'),
         actions: [
           TextButton(
             child: Text((() {
@@ -138,12 +138,12 @@ class BookList extends StatelessWidget {
                                   style: TextStyle(
                                       color: Color(0xFFCC8053),
                                       fontFamily: 'Varela',
-                                      fontSize: 14.0)),
-                              Text(document['description'],
+                                      fontSize: 20.0)),
+                              Text(document['price'] + " zł",
                                   style: TextStyle(
                                       color: Color(0xFF575E67),
                                       fontFamily: 'Varela',
-                                      fontSize: 14.0)),
+                                      fontSize: 15.0)),
                               // -------------------------------- footer section (add to cart)------------------------------- //
                             ]))));
               }).toList(),

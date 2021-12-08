@@ -27,10 +27,14 @@ class MyProductsScreen extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
+
                     content: Column(
+
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+
                         Text("Dodaj ogłoszenie"),
+
                         Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Text(
@@ -65,11 +69,12 @@ class MyProductsScreen extends StatelessWidget {
                         TextField(
                           controller: linkController,
                         ),
+
                       ],
                     ),
                     actions: <Widget>[
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 0),
                         child: RaisedButton(
                           color: Colors.red,
                           onPressed: () {
@@ -183,7 +188,7 @@ class BookList extends StatelessWidget {
                             title: Text(document['name'],
                                 style: Theme.of(context).textTheme.headline6),
                             subtitle: Text(
-                              document['description'],
+                              document['price'] + " zł",
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 15,
