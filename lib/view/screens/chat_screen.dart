@@ -34,7 +34,7 @@ class chatScreen extends StatelessWidget {
 class BookList extends StatelessWidget {
   String id;
 
-  BookList(this.id)
+  BookList(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +53,7 @@ class BookList extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 80),
               children:
               snapshot.data.documents.map((DocumentSnapshot document) {
+                List<Object> l = document['messages'];
                 if(document.documentID == this.id) {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
@@ -61,7 +62,7 @@ class BookList extends StatelessWidget {
                         title: Text(document['p1'] == staticLogInState.email ? document['p2'] : document['p1'],
                             style: Theme.of(context).textTheme.headline6),
                         subtitle: Text(
-                          document['messages'].toString(),
+                          l.toString(),
                           maxLines: 1,
                           style: TextStyle(
                             fontSize: 15,
