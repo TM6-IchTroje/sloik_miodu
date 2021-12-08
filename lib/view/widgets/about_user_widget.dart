@@ -54,7 +54,8 @@ class AboutUserWidget extends StatelessWidget {
         ),
       ),
       Container(
-        padding: EdgeInsets.only(left: 10.0),
+
+        padding: const EdgeInsets.all(10.0),
         child: Container(
           width: MediaQuery.of(context).size.width - 50.0,
           child: Text(this.aboutOwner,
