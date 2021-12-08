@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_shop_app/utils/view/constant_routs.dart';
+import 'package:firebase_shop_app/utils/view/screen_args/chat_route_args.dart';
 import 'package:firebase_shop_app/view/screens/log_in_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -80,6 +82,14 @@ class BookList extends StatelessWidget {
                                 color: Colors.grey[500],
                               ),
                             ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                chatRoute,
+                                arguments: chatRouteArgs(
+                                    id: document.documentID),
+                              );
+                            },
                           ),
                         ),
                       );

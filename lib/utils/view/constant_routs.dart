@@ -3,6 +3,7 @@ const String productsOverviewRoute = '/';
 const String productDetailsRoute = '/productDetailsScreen';
 const String cartScreenRoute = '/cartScreen';
 const String logInRoute = '/logInScreen';
+const String chatRoute = '/chatScreen';
 
 const String myProductsScreenRoute = '/myProductsScreen';
 const String allProductsScreenRoute = '/allProductsScreen';
