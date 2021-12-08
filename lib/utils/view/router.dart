@@ -17,7 +17,10 @@ class Router {
             builder: (_) => ProductDetailsScreen(
                 name: args.name,
                 description: args.description,
-                link: args.link));
+                link: args.link,
+                ownerName: args.ownerName,
+                aboutOwner: args.aboutOwner,
+                photo: args.photo,));
       case myProductsScreenRoute:
         return MaterialPageRoute(builder: (_) => MyProductsScreen());
       case allProductsScreenRoute:
