@@ -48,36 +48,22 @@ class BookList extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           default:
+            final dupa = snapshot.data.documents.where((d) => d.documentID == this.id).first['messages'];
             return new ListView(
-
               padding: EdgeInsets.only(bottom: 80),
               children:
-              snapshot.data.documents.map((DocumentSnapshot document) {
-                List<Object> l = document['messages'];
-                if(document.documentID == this.id) {
-                  return Padding(
+                [
+                  for (int i=0;i<dupa.length;++i)
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                     child: Card(
                       child: ListTile(
-                        title: Text(document['p1'] == staticLogInState.email ? document['p2'] : document['p1'],
+                        title: Text(dupa[i],
                             style: Theme.of(context).textTheme.headline6),
-                        subtitle: Text(
-                          l.toString(),
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey[500],
-                          ),
-                        ),
                       ),
                     ),
-                  );
-                }
-                else
-                {
-                  return Padding(padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0));
-                }
-              }).toList(),
+                  )
+                ]
             );
         }
       },
