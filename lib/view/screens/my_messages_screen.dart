@@ -49,11 +49,6 @@ class NoLogin extends StatelessWidget {
 }
 
 class BookList extends StatelessWidget {
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController priceController = new TextEditingController();
-  TextEditingController descriptionController = new TextEditingController();
-  TextEditingController linkController = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
