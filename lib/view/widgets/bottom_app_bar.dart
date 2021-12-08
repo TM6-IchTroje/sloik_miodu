@@ -1,5 +1,5 @@
 import 'package:firebase_shop_app/view/screens/all_products_screen.dart';
-import 'package:firebase_shop_app/view/screens/blank_screen.dart';
+import 'package:firebase_shop_app/view/screens/my_messages_screen.dart';
 import 'package:firebase_shop_app/view/screens/my_products_screen.dart';
 import 'package:firebase_shop_app/view/shared/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class _SharedBottomAppBarState extends State<SharedBottomAppBar> {
   Widget _lastSelected = AllProductsScreen();
 
   List<Widget> pages = [
-    BlankScreen(),
+    MyMessagesScreen(),
     MyProductsScreen(),
     AllProductsScreen(),
   ];
