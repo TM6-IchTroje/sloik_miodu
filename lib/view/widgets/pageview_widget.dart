@@ -17,7 +17,7 @@ class PageViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     if (number == AvailableNumber.First) {
-    return ProductDetailsWidget(name: this.name, description: this.description, link: this.link);
+    return ProductDetailsWidget(name: this.name, description: this.description, link: this.link, ownerName: this.ownerName);
     }
     else {
       return AboutUserWidget(name: this.name, ownerName: this.ownerName, aboutOwner: this.aboutOwner, photo: this.photo,);
