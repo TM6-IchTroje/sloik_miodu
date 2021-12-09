@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class chatScreen extends StatelessWidget {
   final String id;
+  final textFieldController = TextEditingController();
 
   chatScreen({this.id});
 
@@ -26,7 +27,26 @@ class chatScreen extends StatelessWidget {
           actions: [],
         ),
         body: BookList(id),
-    )
+        bottomSheet:
+        Padding(
+        padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+        child:
+          TextField(
+            controller: textFieldController,
+            decoration: InputDecoration(
+                hintText: 'Enter your message ...'
+            ),
+            maxLines: 1,
+            onSubmitted: (m) {
+              if (m.isNotEmpty) {
+                Firestore.instance.collection("chats").document(id).updateData({
+                  "messages": FieldValue.arrayUnion([staticLogInState.email + "> " + textFieldController.text]),
+                }).whenComplete(() => (context as Element).reassemble());
+              }
+            },
+          ),
+        ),
+      ),
     );
   }
 }
@@ -48,18 +68,18 @@ class BookList extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           default:
-            final dupa = snapshot.data.documents.where((d) => d.documentID == this.id).first['messages'];
+            final msgs = snapshot.data.documents.where((d) => d.documentID == this.id).first['messages'];
             return new ListView(
               padding: EdgeInsets.only(bottom: 80),
               children:
                 [
-                  for (int i=0;i<dupa.length;++i)
+                  for (int i=0;i<msgs.length;++i)
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
                     child: Card(
                       child: ListTile(
-                        title: Text(dupa[i],
-                            style: Theme.of(context).textTheme.headline6),
+                        title: Text(msgs[i],
+                            style: Theme.of(context).textTheme.bodyText1),
                       ),
                     ),
                   )
