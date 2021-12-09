@@ -49,6 +49,7 @@ class signUpState extends State<signUp> {
                     TextFormField(
                       controller: emailController,
                       decoration: InputDecoration(
+                          errorStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(),
                           hintText: "Email",
                           hintStyle: TextStyle(color: Colors.white)),
@@ -63,6 +64,7 @@ class signUpState extends State<signUp> {
                       controller: pass1Controller,
                       obscureText: !_passwordVisible,
                       decoration: InputDecoration(
+                        errorStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
                         hintText: "Hasło:",
                         suffixIcon: IconButton(
@@ -90,6 +92,7 @@ class signUpState extends State<signUp> {
                       controller: pass2Controller,
                       obscureText: !_passwordVisible,
                       decoration: InputDecoration(
+                        errorStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
                         hintText: "Potwierdź hasło:",
                         suffixIcon: IconButton(
