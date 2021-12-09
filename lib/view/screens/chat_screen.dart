@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class chatScreen extends StatelessWidget {
   final String id;
+  final String title;
   final textFieldController = TextEditingController();
 
-  chatScreen({this.id});
+  chatScreen({this.id, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,8 @@ class chatScreen extends StatelessWidget {
       padding: EdgeInsets.only(left: 0.0),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          title: Text(title),
+          backgroundColor: Colors.deepOrangeAccent,
           elevation: 0.0,
           centerTitle: true,
           leading: IconButton(

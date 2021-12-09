@@ -6,8 +6,12 @@ import 'package:flutter/cupertino.dart';
 
 import 'log_in_screen.dart';
 
-class signUp extends StatelessWidget {
+class signUp extends StatefulWidget {
+  signUpState createState() => signUpState();
+}
 
+class signUpState extends State<signUp> {
+  bool _passwordVisible = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -57,13 +61,21 @@ class signUp extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: pass1Controller,
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Hasło:",
-                        suffixIcon: GestureDetector(
-                          child: Icon(Icons.visibility,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
                             color: Colors.white,
                           ),
+                          tooltip: 'Hide/Show password',
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
                         ),
                         hintStyle: TextStyle(color: Colors.white),
                       ),
@@ -76,13 +88,21 @@ class signUp extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: pass2Controller,
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Potwierdź hasło:",
-                        suffixIcon: GestureDetector(
-                          child: Icon(Icons.visibility,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
                             color: Colors.white,
                           ),
+                          tooltip: 'Hide/Show password',
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
                         ),
                         hintStyle: TextStyle(color: Colors.white),
                       ),

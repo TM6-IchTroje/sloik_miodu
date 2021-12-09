@@ -17,7 +17,9 @@ class Router {
         chatRouteArgs args = settings.arguments;
         return MaterialPageRoute(
             builder: (_) => chatScreen(
-              id: args.id)
+              id: args.id,
+              title: args.title,
+            )
         );
       case productDetailsRoute:
         ProductDetailsArgs args = settings.arguments;

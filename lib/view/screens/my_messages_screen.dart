@@ -87,7 +87,9 @@ class BookList extends StatelessWidget {
                                 context,
                                 chatRoute,
                                 arguments: chatRouteArgs(
-                                    id: document.documentID),
+                                    id: document.documentID,
+                                    title: document['p1'] == staticLogInState.email ? document['p2'] : document['p1']
+                                ),
                               );
                             },
                           ),
