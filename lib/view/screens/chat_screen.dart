@@ -77,11 +77,15 @@ class BookList extends StatelessWidget {
                 [
                   for (int i=0;i<msgs.length;++i)
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     child: Card(
+                      color: Colors.deepOrangeAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(90.0),
+                      ),
                       child: ListTile(
                         title: Text(msgs[i],
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.button),
                       ),
                     ),
                   )
