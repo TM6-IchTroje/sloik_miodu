@@ -75,7 +75,7 @@ class BookList extends StatelessWidget {
                             title: Text(document['p1'] == staticLogInState.email ? document['p2'] : document['p1'],
                                 style: Theme.of(context).textTheme.headline6),
                             subtitle: Text(
-                              (document['messages'].length!=0) ? document['messages'].last() : "",
+                              (document['messages'].length!=0) ? document['messages'].last : "",
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 15,
