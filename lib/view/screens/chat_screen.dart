@@ -28,22 +28,22 @@ class chatScreen extends StatelessWidget {
           ),
           actions: [],
         ),
-        body: BookList(id),
-        bottomSheet:
-        Padding(
-        padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-        child:
-          TextField(
+        body: conversationList(id),
+        bottomSheet: Padding(
+          padding: EdgeInsets.symmetric(vertical: 3, horizontal: 30),
+          child: TextField(
             controller: textFieldController,
-            decoration: InputDecoration(
-                hintText: 'Enter your message ...'
-            ),
+            decoration: InputDecoration(hintText: 'Wpisz wiadomość'),
             maxLines: 1,
             onSubmitted: (m) {
               if (m.isNotEmpty) {
+
                 Firestore.instance.collection("chats").document(id).updateData({
-                  "messages": FieldValue.arrayUnion([staticLogInState.email + "> " + textFieldController.text]),
+                  "messages": FieldValue.arrayUnion([
+                    staticLogInState.email + "> " + textFieldController.text
+                  ]),
                 }).whenComplete(() => (context as Element).reassemble());
+                textFieldController.text = "";
               }
             },
           ),
@@ -53,10 +53,17 @@ class chatScreen extends StatelessWidget {
   }
 }
 
-class BookList extends StatelessWidget {
+class conversationList extends StatelessWidget {
   String id;
 
-  BookList(this.id);
+  conversationList(this.id);
+
+
+  String splitMessage (String message)
+  {
+    var email = message.split(">");
+    return email[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,30 +77,31 @@ class BookList extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           default:
-            final msgs = snapshot.data.documents.where((d) => d.documentID == this.id).first['messages'];
+            final msgs = snapshot.data.documents
+                .where((d) => d.documentID == this.id)
+                .first['messages'];
             return new ListView(
-              padding: EdgeInsets.only(bottom: 80),
-              children:
-                [
-                  for (int i=0;i<msgs.length;++i)
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: Card(
-                      color: Colors.deepOrangeAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(90.0),
+                padding: EdgeInsets.only(bottom: 80),
+                children: [
+                  for (int i = 0; i < msgs.length; ++i)
+                    Padding(
+                      padding:
+                      splitMessage(msgs[i]) == staticLogInState.email ? EdgeInsets.only(left: 100, right: 0) : EdgeInsets.only(left: 0, right: 100),
+                      child: Card(
+                        color:
+                        splitMessage(msgs[i]) == staticLogInState.email ? Colors.redAccent : Colors.deepOrangeAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(90.0),
+                        ),
+                        child: ListTile(
+                          title: Text(msgs[i],
+                              style: Theme.of(context).textTheme.button),
+                        ),
                       ),
-                      child: ListTile(
-                        title: Text(msgs[i],
-                            style: Theme.of(context).textTheme.button),
-                      ),
-                    ),
-                  )
-                ]
-            );
+                    )
+                ]);
         }
       },
     );
   }
 }
-

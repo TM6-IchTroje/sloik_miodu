@@ -27,25 +27,25 @@ class AllProductsScreen extends StatelessWidget {
               return "Zaloguj się";
             })()),
             onPressed: () {
-
-              if(staticLogInState.isLoggedIn)
-              {
-                showDialog(context: context, builder: (BuildContext context) {
-                  return new AlertDialog(
-                    content: TextButton(
-                      child: Text("Wyloguj się", style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xFFFA6442),
-                          fontWeight: FontWeight.normal)),
-                      onPressed: (){
-                        staticLogInState.isLoggedIn = false;
-                        Navigator.pushNamed(context, '/MyApp');
-                      },
-                    ),
-                  );
-                });
-              }
-              else {
+              if (staticLogInState.isLoggedIn) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return new AlertDialog(
+                        content: TextButton(
+                          child: Text("Wyloguj się",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Color(0xFFFA6442),
+                                  fontWeight: FontWeight.normal)),
+                          onPressed: () {
+                            staticLogInState.isLoggedIn = false;
+                            Navigator.pushNamed(context, '/MyApp');
+                          },
+                        ),
+                      );
+                    });
+              } else {
                 Navigator.pushNamed(context, '/logIn');
               }
             },
@@ -56,13 +56,13 @@ class AllProductsScreen extends StatelessWidget {
         ],
       ),
 
-      body: BookList(),
+      body: allProducts(),
       // ADD (Create)
     );
   }
 }
 
-class BookList extends StatelessWidget {
+class allProducts extends StatelessWidget {
   TextEditingController nameController = new TextEditingController();
   TextEditingController priceController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();

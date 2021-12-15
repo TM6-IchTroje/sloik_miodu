@@ -14,7 +14,7 @@ class MyMessagesScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("Moje rozmowy"),
         ),
-        body: BookList(),
+        body: messagesList(),
       );
     }
   }
@@ -50,7 +50,7 @@ class NoLogin extends StatelessWidget {
   }
 }
 
-class BookList extends StatelessWidget {
+class messagesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -67,39 +67,46 @@ class BookList extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 80),
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
-                    if(document['p1'] == staticLogInState.email || document['p2'] == staticLogInState.email) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                        child: Card(
-                          child: ListTile(
-                            title: Text(document['p1'] == staticLogInState.email ? document['p2'] : document['p1'],
-                                style: Theme.of(context).textTheme.headline6),
-                            subtitle: Text(
-                              (document['messages'].length!=0) ? document['messages'].last : "",
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.grey[500],
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                chatRoute,
-                                arguments: chatRouteArgs(
-                                    id: document.documentID,
-                                    title: document['p1'] == staticLogInState.email ? document['p2'] : document['p1']
-                                ),
-                              );
-                            },
+                if (document['p1'] == staticLogInState.email ||
+                    document['p2'] == staticLogInState.email) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    child: Card(
+                      child: ListTile(
+                        title: Text(
+                            document['p1'] == staticLogInState.email
+                                ? document['p2']
+                                : document['p1'],
+                            style: Theme.of(context).textTheme.headline6),
+                        subtitle: Text(
+                          (document['messages'].length != 0)
+                              ? document['messages'].last
+                              : "",
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.grey[500],
                           ),
                         ),
-                      );
-                      }
-                    else
-                      {
-                        return Padding(padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0));
-                      }
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            chatRoute,
+                            arguments: chatRouteArgs(
+                                id: document.documentID,
+                                title: document['p1'] == staticLogInState.email
+                                    ? document['p2']
+                                    : document['p1']),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                } else {
+                  return Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 0));
+                }
               }).toList(),
             );
         }

@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'log_in_screen.dart';
 
@@ -41,10 +39,12 @@ class signUpState extends State<signUp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Słoik miodu", style: TextStyle(
-                        fontSize: 40,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                    Text(
+                      "Słoik miodu",
+                      style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                     TextFormField(
                       controller: emailController,
@@ -69,7 +69,9 @@ class signUpState extends State<signUp> {
                         hintText: "Hasło:",
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Colors.white,
                           ),
                           tooltip: 'Hide/Show password',
@@ -97,7 +99,9 @@ class signUpState extends State<signUp> {
                         hintText: "Potwierdź hasło:",
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Colors.white,
                           ),
                           tooltip: 'Hide/Show password',
@@ -127,11 +131,12 @@ class signUpState extends State<signUp> {
                               try {
                                 await FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: pass1Controller.text
-                                );
+                                        email: emailController.text,
+                                        password: pass1Controller.text);
 
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>logInScreen()));
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (ctx) => logInScreen()));
                               } catch (e) {
                                 print(e);
                                 if (e.code == 'weak-password') {

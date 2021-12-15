@@ -1,8 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_shop_app/utils/view/constant_routs.dart';
 import 'package:firebase_shop_app/utils/view/screen_args/chat_route_args.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_shop_app/view/screens/log_in_screen.dart';
+import 'package:flutter/material.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
   final String name;
@@ -10,8 +10,8 @@ class ProductDetailsWidget extends StatelessWidget {
   final String link;
   final String ownerName;
 
-  ProductDetailsWidget({this.name, this.description, this.link, this.ownerName});
-
+  ProductDetailsWidget(
+      {this.name, this.description, this.link, this.ownerName});
 
   @override
   Widget build(BuildContext context) {
@@ -68,45 +68,46 @@ class ProductDetailsWidget extends StatelessWidget {
       // -------------------------------- Btn Add To Cart------------------------------- //
       Center(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             if (staticLogInState.email.compareTo(ownerName) != 0) {
-              Firestore.instance.collection("chats")
+              Firestore.instance
+                  .collection("chats")
                   .where('p1', whereIn: [staticLogInState.email, ownerName])
-                  .snapshots().first.then((value) {
+                  .snapshots()
+                  .first
+                  .then((value) {
                     final doc = value.documents.where((e) =>
-                    e['p2'].toString().compareTo(staticLogInState.email)==0
-                        || e['p2'].toString().compareTo(ownerName)==0
-                    );
-                    if (doc.isNotEmpty)
-                    {
+                        e['p2'].toString().compareTo(staticLogInState.email) ==
+                            0 ||
+                        e['p2'].toString().compareTo(ownerName) == 0);
+                    if (doc.isNotEmpty) {
                       Navigator.pushNamed(
                         context,
                         chatRoute,
                         arguments: chatRouteArgs(
                             id: doc.first.documentID,
-                            title: doc.first['p1'] == staticLogInState.email ? doc.first['p2'] : doc.first['p1']
-                        ),
+                            title: doc.first['p1'] == staticLogInState.email
+                                ? doc.first['p2']
+                                : doc.first['p1']),
                       );
-                    }
-                    else
-                    {
+                    } else {
                       Map<String, dynamic> data = new Map<String, dynamic>();
                       data['p1'] = staticLogInState.email;
                       data['p2'] = ownerName;
                       data['messages'] = [];
-                      Firestore.instance.collection("chats").add(data).then((value) {
+                      Firestore.instance
+                          .collection("chats")
+                          .add(data)
+                          .then((value) {
                         Navigator.pushNamed(
                           context,
                           chatRoute,
                           arguments: chatRouteArgs(
-                              id: value.documentID,
-                              title: ownerName
-                          ),
+                              id: value.documentID, title: ownerName),
                         );
                       });
                     }
                   });
-
             }
           },
           child: Container(
@@ -117,20 +118,15 @@ class ProductDetailsWidget extends StatelessWidget {
                   color: Color(0xFFF17532)),
               child: Center(
                   child: Text(
-                    'Napisz do sprzedawcy!',
-                    style: TextStyle(
-                        fontFamily: 'Varela',
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  )
-              )
-          ),
+                'Napisz do sprzedawcy!',
+                style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ))),
         ),
       ),
     ]);
   }
 }
-
-
-

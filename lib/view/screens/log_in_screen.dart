@@ -8,7 +8,6 @@ class staticLogInState {
 }
 
 class logInScreen extends StatelessWidget {
-
   FirebaseAuth auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -19,13 +18,12 @@ class logInScreen extends StatelessWidget {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = new RegExp(p);
 
-
   Future<bool> checkLogin(TextEditingController emailController,
       TextEditingController passwordController) async {
     try {
       AuthResult userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
+              email: emailController.text, password: passwordController.text);
       staticLogInState.email = emailController.text;
     } catch (e) {
       if (e.code == 'user-not-found') {
@@ -45,7 +43,6 @@ class logInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     void changeToMain(bool answer) {
       if (answer == true) {
         Navigator.pushNamed(context, '/MyApp');
@@ -129,18 +126,17 @@ class logInScreen extends StatelessWidget {
                     Container(
                       height: 45,
                       width: double.infinity,
-
                       child: RaisedButton(
-                          child: Text("Zaloguj się"),
-                          color: Colors.white,
-                          onPressed: () {
-                            checkLogin(_emailController, _passwordController)
-                                .then(
-                                  (value) => changeToMain(value),
-                            );
-                            //Navigator.pushNamed(context, '/allProductsScreen');
-                          },
-                          ),
+                        child: Text("Zaloguj się"),
+                        color: Colors.white,
+                        onPressed: () {
+                          checkLogin(_emailController, _passwordController)
+                              .then(
+                            (value) => changeToMain(value),
+                          );
+                          //Navigator.pushNamed(context, '/allProductsScreen');
+                        },
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -168,10 +164,4 @@ class logInScreen extends StatelessWidget {
       ),
     );
   }
-
-
-
-
-
 }
-
